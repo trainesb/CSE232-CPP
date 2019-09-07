@@ -1,0 +1,97 @@
+bob join rusty
+alice join rusty
+carl join rusty
+matus join arctic 
+gigi join rusty 
+jose  join arctic 
+bob join rusty
+gigi join arctic 
+fedor join arctic
+alice join arctic
+bob leave rusty
+carl leave rusty
+carl leave rusty
+gigi leave arctic
+bob join baron 
+alice join baron 
+lily join baron 
+dhruv join baron 
+sonam join baron 
+loki join baron 
+thor join baron 
+
+
+
+
+auto ParseServerData(const string &fname){
+	
+	ifstream infile(fname);
+	if(infile){
+
+	}
+	else{
+		cout<<"bad file"<<endl;
+	}
+	
+	return 0;
+}
+
+
+void PrintAll(ostream &out, const map<string, set<string>> &sd){
+	ostringstream oss;
+	for(auto itr=sd.begin(); itr!=sd.end(); ++itr){
+		oss<<*itr<<": ";
+	}
+	string result = oss.str();
+
+}
+
+set<string> AllServers(const auto &sd){
+	
+	
+}
+
+
+
+set<string> AllUsers(const auto &sd){
+	map<string, set<string>>::iterator iter;
+	return set_union(sd.begin(), sd.end());
+}
+
+
+int main() {
+
+  auto server_data = ParseServerData("input.txt");
+  cout << "Output"<<endl;;
+  PrintAll(cout,server_data);
+  cout << endl;
+
+  set<std::string> servers = AllServers(server_data);
+  cout << "Server Size:"<< servers.size() << endl;
+  set<std::string> users = AllUsers(server_data);
+  cout << "User Size:" << users.size() << endl;
+/* should print
+arctic : alice fedor jose matus
+baron : alice bob dhruv lily loki sonam thor
+rusty : alice gigi
+*/
+  cout << "Balance "<<endl;
+  BalanceServers(server_data,"s1","s2");
+
+  PrintAll(std::cout,server_data);
+/* should print
+arctic : alice bob dhruv fedor jose lily
+baron : alice loki matus sonam thor
+rusty : alice gigi
+*/
+  cout << "Clean and Balance"<<endl;
+  CleanAndBalance(server_data);
+  
+  PrintAll(cout,server_data);
+/* should print
+arctic : alice fedor lily sonam
+baron : bob gigi loki thor
+rusty : dhruv jose matus
+*/
+
+}
